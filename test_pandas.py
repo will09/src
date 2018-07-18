@@ -38,9 +38,9 @@ print (df.describe(percentiles=[.20, .40, .80, .90, .95]))
 print ("------------------------")
 print (df.corr())
 print ("------------------------")
-print (df.corr(method='spearman'))
+print (df.corr(method="spearman"))
 print ("------------------------")
-print (df.corr(method='kendall'))
+print (df.corr(method="kendall"))
 
 
 
