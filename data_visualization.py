@@ -3,16 +3,13 @@ import pandas as pd
 import requests
 
 PATH = r'/data/src/iris/'
-r = requests.get('https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data')
-with open(PATH + 'iris.data', 'w') as f:
-  f.write(r.text)
+# r = requests.get('https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data')
+# with open(PATH + 'iris.data', 'w') as f:
+#   f.write(r.text)
 
 os.chdir(PATH)
 
 df = pd.read_csv(PATH + 'iris.data', names=['sepal length', 'sepal width', 'petal length', 'petal width', 'class'])
-
-print (df.corr(method="spearman"))
-print (df.corr(method="kendall"))
 
 import matplotlib.pyplot as plt
 plt.style.use('ggplot')
@@ -34,8 +31,8 @@ ax[0][0].set_title('Iris Petal Width', fontsize=14, y=1.01)
 
 ax[0][1].hist(df['petal length'], color='black');
 ax[0][1].set_ylabel('Count', fontsize=12)
-ax[0][1].set_xlabel('Length', fontsize=12)
-ax[0][1].set_title('Iris Petal Length', fontsize=14, y=1.01)
+ax[0][1].set_xlabel('Lenth', fontsize=12)
+ax[0][1].set_title('Iris Petal Lenth', fontsize=14, y=1.01)
 
 ax[1][0].hist(df['sepal width'], color='black');
 ax[1][0].set_ylabel('Count', fontsize=12)
@@ -50,7 +47,7 @@ ax[1][1].set_title('Iris Sepal Length', fontsize=14, y=1.01)
 plt.tight_layout()
 
 fig, ax = plt.subplots(figsize=(6,6))
-ax.scatter(df['petal width'], df['petal length'], color='green')
+ax.scatter(df['petal width'],df['petal length'], color='green')
 ax.set_xlabel('Petal Width')
 ax.set_ylabel('Petal Length')
 ax.set_title('Petal Scatterplot')
@@ -74,18 +71,20 @@ ax.bar(x, ver_y, bar_width, color='black')
 ax.set_xticks(x + (bar_width/2))
 ax.set_xticklabels(labels, rotation=-70, fontsize=12);
 ax.set_title('Mean Feature Measurement By Class', y=1.01)
-ax.legend(['Virginica', 'Setosa', 'Versicolor'])
+ax.legend(['Virginica','Setosa','Versicolor'])
 
 import seaborn as sns
 sns.pairplot(df, hue="class")
 
-fig, ax = plt.subplots(2, 2, figsize=(7,7))
+fig, ax = plt.subplots(2, 2, figsize=(7, 7))
 sns.set(style='white', palette='muted')
 sns.violinplot(x=df['class'], y=df['sepal length'], ax=ax[0,0])
 sns.violinplot(x=df['class'], y=df['sepal width'], ax=ax[0,1])
 sns.violinplot(x=df['class'], y=df['petal length'], ax=ax[1,0])
 sns.violinplot(x=df['class'], y=df['petal width'], ax=ax[1,1])
-fig.suptitle('Violin Plots', rotation=-90)
+fig.suptitle('Violin Plots', fontsize=16, y=1.03)
 for i in ax.flat:
     plt.setp(i.get_xticklabels(), rotation=-90)
 fig.tight_layout()
+
+
